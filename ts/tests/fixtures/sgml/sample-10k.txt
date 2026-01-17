@@ -1,0 +1,151 @@
+<SEC-DOCUMENT>0000320193-23-000106.txt : 20231103
+<SEC-HEADER>0000320193-23-000106.hdr.sgml : 20231103
+<ACCEPTANCE-DATETIME>20231103060742
+ACCESSION NUMBER:		0000320193-23-000106
+CONFORMED SUBMISSION TYPE:	10-K
+PUBLIC DOCUMENT COUNT:		147
+CONFORMED PERIOD OF REPORT:	20230930
+FILED AS OF DATE:		20231103
+DATE AS OF CHANGE:		20231103
+
+COMPANY DATA:
+	COMPANY CONFORMED NAME:			APPLE INC
+	CENTRAL INDEX KEY:			0000320193
+	STANDARD INDUSTRIAL CLASSIFICATION:	ELECTRONIC COMPUTERS [3571]
+	ORGANIZATION NAME:
+	IRS NUMBER:				942404110
+	STATE OF INCORPORATION:			CA
+	FISCAL YEAR END:			0930
+</SEC-HEADER>
+<DOCUMENT>
+<TYPE>10-K
+<SEQUENCE>1
+<FILENAME>aapl-20230930.htm
+<DESCRIPTION>10-K
+<TEXT>
+<!DOCTYPE html>
+<html>
+<head>
+<title>APPLE INC - 10-K</title>
+<meta name="company" content="APPLE INC">
+<meta name="filing-type" content="10-K">
+<meta name="cik" content="0000320193">
+</head>
+<body>
+<div style="text-align:center">
+<h1>APPLE INC</h1>
+<h2>FORM 10-K</h2>
+<p>For the fiscal year ended September 30, 2023</p>
+</div>
+
+<h2>Table of Contents</h2>
+<table>
+<tr><td><a href="#item1">Item 1. Business</a></td><td>4</td></tr>
+<tr><td><a href="#item1a">Item 1A. Risk Factors</a></td><td>8</td></tr>
+<tr><td><a href="#item7">Item 7. Management's Discussion and Analysis</a></td><td>20</td></tr>
+<tr><td><a href="#item8">Item 8. Financial Statements</a></td><td>35</td></tr>
+</table>
+
+<h2>PART I</h2>
+
+<div id="item1">
+<h3>Item 1. Business</h3>
+<p>Apple Inc. ("Apple") designs, manufactures and markets smartphones, personal computers, tablets, wearables and accessories, and sells a variety of related services.</p>
+<p>The Company's fiscal year is the 52- or 53-week period that ends on the last Saturday of September.</p>
+
+<h4>Products</h4>
+<p><b>iPhone</b></p>
+<p>iPhone is the Company's line of smartphones based on its iOS operating system. During 2023, the Company released iPhone 15, iPhone 15 Plus, iPhone 15 Pro and iPhone 15 Pro Max.</p>
+
+<p><b>Mac</b></p>
+<p>Mac is the Company's line of personal computers based on its macOS operating system. During 2023, the Company released new versions of MacBook Pro and Mac mini.</p>
+
+<p><b>iPad</b></p>
+<p>iPad is the Company's line of multipurpose tablets based on its iPadOS operating system.</p>
+
+<h4>Services</h4>
+<p>The Company offers various services including advertising, AppleCare, cloud services, digital content and payment services.</p>
+</div>
+
+<div id="item1a">
+<h3>Item 1A. Risk Factors</h3>
+<p>The Company's business, reputation, results of operations, financial condition and stock price can be affected by a number of factors.</p>
+
+<h4>Macroeconomic and Industry Risks</h4>
+<p>The Company's operations and performance depend significantly on global and regional economic conditions and adverse economic conditions can materially adversely affect the Company's business.</p>
+
+<p>Global markets for the Company's products and services are highly competitive and subject to rapid technological change, and the Company may be unable to compete effectively in these markets.</p>
+
+<h4>Business and Operational Risks</h4>
+<p>To remain competitive and stimulate customer demand, the Company must successfully manage frequent introductions and transitions of products and services.</p>
+
+<p>The Company depends on the performance of distributors, carriers and other resellers.</p>
+
+<p>The Company depends on component and product manufacturing and logistical services provided by outsourcing partners.</p>
+</div>
+
+<div id="item7">
+<h3>Item 7. Management's Discussion and Analysis of Financial Condition and Results of Operations</h3>
+<p>The following discussion should be read in conjunction with the consolidated financial statements and accompanying notes.</p>
+
+<h4>Fiscal 2023 Highlights</h4>
+<p>Total net sales were $383.3 billion during 2023, a decrease of 3% compared to 2022.</p>
+
+<table>
+<tr><th>Category</th><th>2023</th><th>2022</th><th>Change</th></tr>
+<tr><td>iPhone</td><td>$200.6B</td><td>$205.5B</td><td>(2%)</td></tr>
+<tr><td>Mac</td><td>$29.4B</td><td>$40.2B</td><td>(27%)</td></tr>
+<tr><td>iPad</td><td>$28.3B</td><td>$29.3B</td><td>(3%)</td></tr>
+<tr><td>Services</td><td>$85.2B</td><td>$78.1B</td><td>9%</td></tr>
+</table>
+
+<h4>Liquidity and Capital Resources</h4>
+<p>The Company believes its existing balances of cash, cash equivalents and marketable securities will be sufficient to satisfy its working capital needs.</p>
+</div>
+
+<div id="item8">
+<h3>Item 8. Financial Statements and Supplementary Data</h3>
+
+<h4>Consolidated Balance Sheets</h4>
+<table>
+<tr><th>Assets</th><th>September 30, 2023</th><th>September 24, 2022</th></tr>
+<tr><td>Cash and cash equivalents</td><td>$29,965</td><td>$23,646</td></tr>
+<tr><td>Marketable securities</td><td>$31,590</td><td>$24,658</td></tr>
+<tr><td>Accounts receivable</td><td>$29,508</td><td>$28,184</td></tr>
+<tr><td>Total current assets</td><td>$143,566</td><td>$135,405</td></tr>
+<tr><td>Total assets</td><td>$352,583</td><td>$352,755</td></tr>
+</table>
+
+<h4>Consolidated Statements of Operations</h4>
+<table>
+<tr><th></th><th>2023</th><th>2022</th><th>2021</th></tr>
+<tr><td>Net sales</td><td>$383,285</td><td>$394,328</td><td>$365,817</td></tr>
+<tr><td>Cost of sales</td><td>$214,137</td><td>$223,546</td><td>$212,981</td></tr>
+<tr><td>Gross margin</td><td>$169,148</td><td>$170,782</td><td>$152,836</td></tr>
+<tr><td>Net income</td><td>$96,995</td><td>$99,803</td><td>$94,680</td></tr>
+</table>
+</div>
+
+<h2>PART IV</h2>
+
+<div id="item15">
+<h3>Item 15. Exhibits and Financial Statement Schedules</h3>
+<p>(a) The following documents are filed as part of this report:</p>
+<p>1. Financial Statements: See Index to Consolidated Financial Statements in Part II, Item 8.</p>
+<p>2. Financial Statement Schedules: None.</p>
+</div>
+
+<div id="signatures">
+<h3>SIGNATURES</h3>
+<p>Pursuant to the requirements of Section 13 or 15(d) of the Securities Exchange Act of 1934, the registrant has duly caused this report to be signed on its behalf by the undersigned, thereunto duly authorized.</p>
+<p>APPLE INC.</p>
+<p>Date: November 3, 2023</p>
+<p>By: /s/ Timothy D. Cook</p>
+<p>Timothy D. Cook, Chief Executive Officer</p>
+</div>
+
+</body>
+</html>
+</TEXT>
+</DOCUMENT>
+</SEC-DOCUMENT>

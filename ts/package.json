@@ -1,0 +1,37 @@
+{
+  "name": "@edgartools/ts",
+  "version": "0.1.0",
+  "description": "TypeScript implementation of EdgarTools SEC filing parser",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write src tests"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "1.0.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0",
+    "@vitest/coverage-v8": "^1.0.0",
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
