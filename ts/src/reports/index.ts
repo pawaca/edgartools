@@ -14,6 +14,7 @@ export {
   extractItemContentFromText,
   EIGHT_K_STRUCTURE,
 } from './eight-k.js';
+export { TwentyF } from './twenty-f.js';
 export {
   FilingStructure,
   ItemOnlyFilingStructure,
