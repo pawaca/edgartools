@@ -1,0 +1,65 @@
+# TypeScript Port Tasks
+
+This directory contains task instructions for parallel development agents to port Python SEC report parsing code to TypeScript.
+
+## Task Files
+
+| Task File | Description | Branch Name |
+|-----------|-------------|-------------|
+| `TASK_STRUCTURES.md` | Filing structure utilities (base dependency) | `claude/ts-structures-impl-SSJC5` |
+| `TASK_10Q.md` | 10-Q Quarterly Report | `claude/ts-tenq-impl-SSJC5` |
+| `TASK_8K.md` | 8-K Current Report | `claude/ts-eightk-impl-SSJC5` |
+| `TASK_20F.md` | 20-F Foreign Private Issuer Report | `claude/ts-twentyf-impl-SSJC5` |
+| `TASK_PRESS_RELEASE.md` | Press Release attachments | `claude/ts-pressrelease-impl-SSJC5` |
+| `TASK_MERGE.md` | Merge all branches | Main branch |
+
+## Dependencies
+
+```
+TASK_STRUCTURES (base)
+    ├── TASK_10Q
+    ├── TASK_8K
+    │   └── TASK_PRESS_RELEASE
+    └── TASK_20F
+```
+
+## How to Use
+
+### For Implementation Agents
+
+1. Checkout your assigned branch
+2. Read the corresponding task file
+3. Study the Python source files referenced in the task
+4. Implement the TypeScript port
+5. Write tests
+6. Run `npm test` and `npm run build`
+7. Commit and push to your branch
+
+### For Merge Agent
+
+1. Follow `TASK_MERGE.md` instructions
+2. Merge branches in dependency order
+3. Resolve conflicts following guidelines
+4. Run final validation
+5. Commit and push
+
+## Python Source Files
+
+All implementations should port from these Python files:
+
+| Python File | TypeScript Target |
+|-------------|-------------------|
+| `edgar/company_reports/_base.py` | `ts/src/reports/base.ts` (done) |
+| `edgar/company_reports/_structures.py` | `ts/src/reports/structures.ts` |
+| `edgar/company_reports/ten_k.py` | `ts/src/reports/ten-k.ts` (done) |
+| `edgar/company_reports/ten_q.py` | `ts/src/reports/ten-q.ts` |
+| `edgar/company_reports/current_report.py` | `ts/src/reports/eight-k.ts` |
+| `edgar/company_reports/twenty_f.py` | `ts/src/reports/twenty-f.ts` |
+| `edgar/company_reports/press_release.py` | `ts/src/reports/press-release.ts` |
+
+## Key Principles
+
+1. **PORT, don't create**: Faithfully replicate Python behavior
+2. **Test coverage**: Write tests for all ported functionality
+3. **Convention compliance**: Use TypeScript/JavaScript conventions (camelCase, etc.)
+4. **Feature parity**: All Python public methods should have TypeScript equivalents
