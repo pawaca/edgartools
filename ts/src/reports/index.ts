@@ -5,7 +5,15 @@
 export { BaseReport, type ReportOptions, type SectionNameMapping } from './base.js';
 export { TenK } from './ten-k.js';
 export { TenQ, type StructureInfo, type StructureItem } from './ten-q.js';
-export { EightK, normalizeItemNumber } from './eight-k.js';
+export {
+  EightK,
+  SixK,
+  CurrentReport,
+  normalizeItemNumber,
+  extractItemsFromText,
+  extractItemContentFromText,
+  EIGHT_K_STRUCTURE,
+} from './eight-k.js';
 export {
   FilingStructure,
   ItemOnlyFilingStructure,
