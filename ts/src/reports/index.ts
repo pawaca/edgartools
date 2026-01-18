@@ -6,3 +6,8 @@ export { BaseReport, type ReportOptions, type SectionNameMapping } from './base.
 export { TenK } from './ten-k.js';
 export { TenQ } from './ten-q.js';
 export { EightK, normalizeItemNumber } from './eight-k.js';
+export {
+  PressRelease,
+  PressReleases,
+  filterPressReleaseAttachments,
+} from './press-release.js';

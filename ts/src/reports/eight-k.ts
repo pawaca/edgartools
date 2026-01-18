@@ -8,6 +8,7 @@
 import type { Section } from '../types/section.js';
 import { FilingSGML } from '../sgml/filing-sgml.js';
 import { BaseReport, type SectionNameMapping } from './base.js';
+import { PressReleases, filterPressReleaseAttachments } from './press-release.js';
 
 /**
  * Normalize 8-K item number.
@@ -303,5 +304,41 @@ export class EightK extends BaseReport {
   /** Item 9.01 - Financial Statements and Exhibits */
   get financialStatementsAndExhibits(): string | null {
     return this.getSection('item_901');
+  }
+
+  // ===============================
+  // Press Release Access
+  // ===============================
+
+  /**
+   * Check if this 8-K has any press release attachments.
+   *
+   * Matches Python's has_press_release property from current_report.py
+   */
+  get hasPressRelease(): boolean {
+    return this.pressReleases !== null;
+  }
+
+  /**
+   * Get press release attachments.
+   *
+   * Queries for HTML attachments that are:
+   * - Named with "RELEASE" in description, OR
+   * - Have document type EX-99.1, EX-99, or EX-99.01
+   *
+   * Matches Python's press_releases property from current_report.py lines 344-361
+   */
+  get pressReleases(): PressReleases | null {
+    if (!this._sgml) {
+      return null;
+    }
+
+    const attachments = this._sgml.attachments;
+    const pressReleaseAttachments = filterPressReleaseAttachments(attachments);
+
+    if (pressReleaseAttachments.length > 0) {
+      return new PressReleases(pressReleaseAttachments);
+    }
+    return null;
   }
 }
