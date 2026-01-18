@@ -186,7 +186,14 @@ Test with real 8-K filings from different eras:
 
 ## Branch Information
 
-Work on branch: `claude/ts-eightk-impl-SSJC5`
+Your branch will be auto-generated when the Claude Code remote session starts.
+Commit and push to your assigned branch when work is complete.
+
+## Dependencies
+
+**Requires**: `TASK_STRUCTURES.md` must be completed first (ItemOnlyFilingStructure class needed).
+
+**Required by**: `TASK_PRESS_RELEASE.md` depends on this task's completion.
 
 ## Success Criteria
 

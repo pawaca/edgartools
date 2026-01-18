@@ -364,7 +364,14 @@ export const TEN_K_STRUCTURE = new FilingStructure({
 
 ## Branch Information
 
-Work on branch: `claude/ts-structures-impl-SSJC5`
+Your branch will be auto-generated when the Claude Code remote session starts.
+Commit and push to your assigned branch when work is complete.
+
+## Dependencies
+
+**No dependencies** - This is the base task that other tasks depend on.
+
+**Required by**: All other tasks (TASK_10Q, TASK_8K, TASK_20F) depend on this task's completion.
 
 ## Success Criteria
 

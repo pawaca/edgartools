@@ -233,7 +233,12 @@ Test with real 20-F filings:
 
 ## Branch Information
 
-Work on branch: `claude/ts-twentyf-impl-SSJC5`
+Your branch will be auto-generated when the Claude Code remote session starts.
+Commit and push to your assigned branch when work is complete.
+
+## Dependencies
+
+**Requires**: `TASK_STRUCTURES.md` must be completed first (FilingStructure class needed).
 
 ## Success Criteria
 

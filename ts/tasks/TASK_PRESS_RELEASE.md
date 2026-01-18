@@ -354,7 +354,12 @@ Test with real 8-K filings that have press releases:
 
 ## Branch Information
 
-Work on branch: `claude/ts-pressrelease-impl-SSJC5`
+Your branch will be auto-generated when the Claude Code remote session starts.
+Commit and push to your assigned branch when work is complete.
+
+## Dependencies
+
+**Requires**: `TASK_8K.md` must be completed first (PressRelease is accessed via EightK.pressReleases).
 
 ## Success Criteria
 
