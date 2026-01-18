@@ -108,7 +108,35 @@ export { PatternSectionExtractor } from './extractors/pattern-section-extractor.
 export { TEN_K_PATTERNS, getTenKPattern, getTenKSectionNames } from './extractors/patterns/index.js';
 
 // Reports
-export { TenK, type TenKOptions } from './reports/ten-k.js';
+export { TenK } from './reports/ten-k.js';
+export { TenQ, type StructureInfo, type StructureItem } from './reports/ten-q.js';
+export {
+  EightK,
+  SixK,
+  CurrentReport,
+  normalizeItemNumber,
+  extractItemsFromText,
+  extractItemContentFromText,
+  EIGHT_K_STRUCTURE,
+} from './reports/eight-k.js';
+export { TwentyF } from './reports/twenty-f.js';
+export {
+  PressRelease,
+  PressReleases,
+  filterPressReleaseAttachments,
+} from './reports/press-release.js';
+export {
+  FilingStructure,
+  ItemOnlyFilingStructure,
+  type ItemDefinition,
+  type PartStructure,
+  type StructureDefinition,
+  isValidItemForFiling,
+  extractItemsFromSections,
+  TEN_K_STRUCTURE,
+  TEN_Q_STRUCTURE,
+} from './reports/structures.js';
+export { BaseReport, type ReportOptions, type SectionNameMapping } from './reports/base.js';
 
 // Config defaults
 export { DEFAULT_PARSER_CONFIG } from './types/document.js';

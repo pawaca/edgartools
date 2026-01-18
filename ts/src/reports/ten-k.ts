@@ -6,7 +6,7 @@
  */
 
 import { FilingSGML } from '../sgml/filing-sgml.js';
-import { BaseReport, type ReportOptions, type SectionNameMapping } from './base.js';
+import { BaseReport, type SectionNameMapping } from './base.js';
 
 /**
  * 10-K Section to Item mapping.
