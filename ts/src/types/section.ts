@@ -7,7 +7,7 @@ import type { INode } from './nodes.js';
 export type DetectionMethod = 'toc' | 'heading' | 'pattern';
 
 export interface Section {
-  /** Normalized section name (e.g., 'item_1', 'item_1a') */
+  /** Normalized section name (e.g., 'item_1', 'item_1a', 'part_i_item_1') */
   name: string;
 
   /** Display title (e.g., 'Item 1 - Business') */
@@ -24,6 +24,15 @@ export interface Section {
 
   /** How the section was detected */
   detectionMethod: DetectionMethod;
+
+  /** Part number for 10-Q (e.g., 'I', 'II') */
+  part?: string;
+
+  /** Item number (e.g., '1', '1A', '7') */
+  item?: string;
+
+  /** Whether section boundaries have been validated */
+  validated?: boolean;
 
   /** Extract text content from section */
   text(): string;
