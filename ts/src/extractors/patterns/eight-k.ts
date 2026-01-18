@@ -32,6 +32,11 @@ export const EIGHT_K_PATTERNS: SectionPatterns = {
     { pattern: /^Mine\s+Safety/i, title: 'Mine Safety' },
   ],
 
+  item_105: [
+    { pattern: /^(Item|ITEM)\s+1\.\s*05\.?\s*[-–—.:]?\s*Material\s+Cybersecurity/i, title: 'Item 1.05 - Material Cybersecurity Incidents' },
+    { pattern: /^Material\s+Cybersecurity\s+Incidents/i, title: 'Material Cybersecurity Incidents' },
+  ],
+
   // ===============================
   // Section 2 - Financial Information
   // ===============================
