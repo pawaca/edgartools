@@ -16,6 +16,11 @@ export {
 } from './eight-k.js';
 export { TwentyF } from './twenty-f.js';
 export {
+  PressRelease,
+  PressReleases,
+  filterPressReleaseAttachments,
+} from './press-release.js';
+export {
   FilingStructure,
   ItemOnlyFilingStructure,
   type ItemDefinition,

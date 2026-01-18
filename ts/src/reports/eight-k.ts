@@ -10,6 +10,7 @@
 import type { Section } from '../types/section.js';
 import { FilingSGML } from '../sgml/filing-sgml.js';
 import { BaseReport, type SectionNameMapping, type ReportOptions } from './base.js';
+import { PressReleases, filterPressReleaseAttachments } from './press-release.js';
 
 // ===============================
 // Item Normalization Functions
@@ -678,67 +679,6 @@ export class EightK extends BaseReport {
   }
 
   // ===============================
-  // Press Release Detection
-  // ===============================
-
-  /**
-   * Check if this filing has press releases attached.
-   *
-   * Note: This is a stub implementation. Full press release parsing
-   * will be implemented in TASK_PRESS_RELEASE.
-   *
-   * Ported from Python: has_press_release property
-   */
-  get hasPressRelease(): boolean {
-    return this.pressReleases !== null;
-  }
-
-  /**
-   * Get press release attachments.
-   *
-   * Returns attachments that match press release criteria:
-   * - HTML documents
-   * - Named as "RELEASE" in description
-   * - Document type EX-99, EX-99.1, or EX-99.01
-   *
-   * Note: Returns raw attachment info. Full PressReleases class
-   * will be implemented in TASK_PRESS_RELEASE.
-   *
-   * Ported from Python: press_releases property
-   */
-  get pressReleases(): { document: string; type: string; description: string }[] | null {
-    if (!this._sgml) {
-      return null;
-    }
-
-    const attachments = this._sgml.attachments;
-    const releaseAttachments: { document: string; type: string; description: string }[] = [];
-
-    for (const attachment of attachments) {
-      const document = attachment.document?.toLowerCase() || '';
-      const docType = attachment.documentType || '';
-      const description = attachment.description?.toUpperCase() || '';
-
-      // Check criteria:
-      // 1. HTML document
-      // 2. Named release OR type is EX-99.x
-      const isHtml = document.endsWith('.htm') || document.endsWith('.html');
-      const isNamedRelease = description.includes('RELEASE');
-      const isEx99 = ['EX-99.1', 'EX-99', 'EX-99.01'].includes(docType);
-
-      if (isHtml && (isNamedRelease || isEx99)) {
-        releaseAttachments.push({
-          document: attachment.document || '',
-          type: docType,
-          description: attachment.description || '',
-        });
-      }
-    }
-
-    return releaseAttachments.length > 0 ? releaseAttachments : null;
-  }
-
-  // ===============================
   // Text Content
   // ===============================
 
@@ -997,6 +937,42 @@ export class EightK extends BaseReport {
   /** Item 9.01 - Financial Statements and Exhibits */
   get financialStatementsAndExhibits(): string | null {
     return this.getSection('item_901');
+  }
+
+  // ===============================
+  // Press Release Access
+  // ===============================
+
+  /**
+   * Check if this 8-K has any press release attachments.
+   *
+   * Matches Python's has_press_release property from current_report.py
+   */
+  get hasPressRelease(): boolean {
+    return this.pressReleases !== null;
+  }
+
+  /**
+   * Get press release attachments.
+   *
+   * Queries for HTML attachments that are:
+   * - Named with "RELEASE" in description, OR
+   * - Have document type EX-99.1, EX-99, or EX-99.01
+   *
+   * Matches Python's press_releases property from current_report.py lines 344-361
+   */
+  get pressReleases(): PressReleases | null {
+    if (!this._sgml) {
+      return null;
+    }
+
+    const attachments = this._sgml.attachments;
+    const pressReleaseAttachments = filterPressReleaseAttachments(attachments);
+
+    if (pressReleaseAttachments.length > 0) {
+      return new PressReleases(pressReleaseAttachments);
+    }
+    return null;
   }
 }
 
