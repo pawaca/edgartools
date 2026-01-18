@@ -9,7 +9,8 @@
 
 import type { Section } from '../types/section.js';
 import { FilingSGML } from '../sgml/filing-sgml.js';
-import { BaseReport, type SectionNameMapping } from './base.js';
+import { BaseReport, type ReportOptions, type SectionNameMapping } from './base.js';
+import { TEN_Q_STRUCTURE } from './structures.js';
 
 /**
  * 10-Q Section to Item mapping.
@@ -71,10 +72,42 @@ const ITEM_TO_SECTION: SectionNameMapping = Object.fromEntries(
  * console.log(tenq.riskFactors);          // Part II, Item 1A
  * ```
  */
+/**
+ * Structure information for a filing item.
+ */
+export interface StructureItem {
+  part: string;
+  itemNum: string;
+  title: string;
+  exists: boolean;
+}
+
+/**
+ * Structure information for a filing.
+ */
+export interface StructureInfo {
+  parts: {
+    name: string;
+    items: StructureItem[];
+  }[];
+}
+
 export class TenQ extends BaseReport {
   readonly form = '10-Q';
   readonly sectionToItem = SECTION_TO_ITEM;
   readonly itemToSection = ITEM_TO_SECTION;
+
+  /** The 10-Q filing structure definition */
+  static readonly structure = TEN_Q_STRUCTURE;
+
+  constructor(options: ReportOptions) {
+    super(options);
+    // Validate form type
+    const form = this._sgml?.form || '';
+    if (form && !['10-Q', '10-Q/A'].includes(form)) {
+      throw new Error(`Expected 10-Q form but got ${form}`);
+    }
+  }
 
   /**
    * Create TenQ from SGML text.
@@ -105,7 +138,7 @@ export class TenQ extends BaseReport {
   override get items(): string[] {
     const items: string[] = [];
 
-    for (const [key, section] of this.sections) {
+    for (const [key] of this.sections) {
       if (key.startsWith('part_')) {
         const partMatch = key.match(/^part_(i{1,2})_/i);
         const itemMatch = key.match(/item_(\d+[a-z]?)/i);
@@ -241,5 +274,124 @@ export class TenQ extends BaseReport {
     const partKey = part === 'I' ? 'i' : 'ii';
     const normalized = itemNum.toLowerCase().replace(/^item\s*/i, '');
     return this.getSection(`part_${partKey}_item_${normalized}`);
+  }
+
+  /**
+   * Get item text with explicit part specification.
+   *
+   * This method allows accessing items that have the same number in different parts.
+   * For 10-Q filings, Item 1 exists in both Part I (Financial Statements) and
+   * Part II (Legal Proceedings).
+   *
+   * @param part - Part identifier ('Part I', 'Part II', 'PART I', 'PART II', 'I', 'II')
+   * @param item - Item identifier ('Item 1', 'Item 1A', '1', '1A')
+   * @returns Item text content, or null if not found
+   *
+   * @example
+   * ```typescript
+   * tenQ.getItemWithPart('Part I', 'Item 1')  // Financial Statements
+   * tenQ.getItemWithPart('Part II', 'Item 1') // Legal Proceedings
+   * tenQ.getItemWithPart('I', '1')            // Also works
+   * ```
+   */
+  getItemWithPart(part: string, item: string): string | null {
+    // Normalize part
+    const partLower = part.toLowerCase().trim();
+    let partPrefix: string | null = null;
+
+    if (['part i', 'part_i', 'i', '1'].includes(partLower)) {
+      partPrefix = 'part_i';
+    } else if (['part ii', 'part_ii', 'ii', '2'].includes(partLower)) {
+      partPrefix = 'part_ii';
+    }
+
+    if (partPrefix) {
+      // Normalize item
+      const itemLower = item.toLowerCase().trim();
+      const itemMatch = itemLower.match(/^(?:item\s+)?(\d+[a-z]?)$/i);
+      if (itemMatch) {
+        const itemNum = itemMatch[1];
+        const key = `${partPrefix}_item_${itemNum}`;
+        if (this.sections.has(key)) {
+          return this.getSection(key);
+        }
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Get the structure of this 10-Q filing showing which items exist.
+   *
+   * Returns an object describing the filing structure with parts and items,
+   * indicating which items were found in this filing.
+   *
+   * @returns Structure information object
+   *
+   * @example
+   * ```typescript
+   * const structure = tenQ.getStructure();
+   * for (const part of structure.parts) {
+   *   console.log(part.name);
+   *   for (const item of part.items) {
+   *     const status = item.exists ? '✓' : '✗';
+   *     console.log(`  ${status} Item ${item.itemNum}: ${item.title}`);
+   *   }
+   * }
+   * ```
+   */
+  getStructure(): StructureInfo {
+    // Get the actual items from the filing
+    const actualItems = this.items;
+
+    // Create a set of found items (normalized) for checking
+    // Handle both old format 'Item 1' and new format 'Part I, Item 1'
+    const foundItems = new Set<string>();
+    for (const item of actualItems) {
+      // Parse 'Part I, Item 1' -> ('I', '1')
+      const match = item.match(/Part\s+(I{1,2}),\s*Item\s+(\d+[A-Z]?)/i);
+      if (match) {
+        foundItems.add(`${match[1].toUpperCase()}_${match[2].toUpperCase()}`);
+      } else {
+        // Old format 'Item 1' - assume Part I for backward compat
+        const itemMatch = item.match(/Item\s+(\d+[A-Z]?)/i);
+        if (itemMatch) {
+          foundItems.add(`I_${itemMatch[1].toUpperCase()}`);
+        }
+      }
+    }
+
+    // Build the structure info
+    const parts: StructureInfo['parts'] = [];
+
+    for (const [partName, partItems] of Object.entries(TEN_Q_STRUCTURE.structure)) {
+      // Determine part number for lookup
+      const partNum = partName.toUpperCase().includes('II') ? 'II' : 'I';
+
+      const items: StructureItem[] = [];
+      for (const [itemKey, itemData] of Object.entries(partItems)) {
+        // Extract item number from key (e.g., 'ITEM 1' -> '1', 'ITEM 1A' -> '1A')
+        const itemNumMatch = itemKey.match(/ITEM\s+(\d+[A-Z]?)/i);
+        const itemNum = itemNumMatch ? itemNumMatch[1].toUpperCase() : itemKey;
+
+        // Check if this part+item exists in the actual filing
+        const exists = foundItems.has(`${partNum}_${itemNum}`);
+
+        items.push({
+          part: partNum,
+          itemNum,
+          title: (itemData as { Title: string }).Title,
+          exists,
+        });
+      }
+
+      parts.push({
+        name: partName,
+        items,
+      });
+    }
+
+    return { parts };
   }
 }
